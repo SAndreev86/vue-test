@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="example">
+    <input type="text" v-model="message">
+	  <ul>
+	  	<li v-for="ar in reversedMessage" >{{ar}}</li>
+	  </ul>
+	</div>
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/vue.resource/1.2.0/vue-resource.min.js"></script>
+    <script>
+     var vm = new Vue({
+		  el: '#example',
+		  data: {
+		    message: '',
+		    origin: '',
+		    array: []
+		  },
+		  computed: {
+		    reversedMessage: function () {
+
+		    	var mass = []
+		    	var mess = this.message
+
+		      	this.array.forEach(function(item, i, arr) {
+
+		      		var string = mess.trim().toLowerCase();
+		    
+		            if(item.body.toLowerCase().indexOf(string) !== -1){
+		                mass.push(item.body)
+		            }
+		      	});
+		      return mass
+		    }
+		  },
+
+		     created: function() {
+		     	// GET /someUrl
+				  this.$http.get('http://jsonplaceholder.typicode.com/posts').then(response => {
+				  	
+				  	this.array = response.data
+
+ 					
+ 					console.log(response.data)
+
+				  }, response => {
+
+				  });
+		     }
+		  
+
+
+		})
+    </script>
+</body>
+</html>
